@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Post(models.Model):
@@ -10,6 +10,7 @@ class Post(models.Model):
 
     title = models.CharField(("Überschrift"), max_length=250)
     slug = models.SlugField(("Schlagwort"))
+    author = models.ForeignKey(User, verbose_name=("Author"), on_delete=models.CASCADE, related_name='blog_posts')
     body = models.TextField(("Inhalt"))
     publish = models.DateTimeField(("veröffentlicht"), default=timezone.now)
     created = models.DateTimeField(("erstellt"), auto_now_add=True)
